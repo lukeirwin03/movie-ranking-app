@@ -1,0 +1,193 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main app container */
+.app-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #333;
+  color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Title of the app */
+.app-title {
+  font-size: 3rem;
+  color: #b6c3d0;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Section for the movie form */
+.movie-form {
+  color: #333;
+  background-color: #ffffff;
+  padding: 20px;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form section title */
+.form-title {
+  font-size: 1.8rem;
+  color: #34495e;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Input fields for the movie form */
+.input-title, .input-rating {
+  color:333;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-title:focus, .input-rating:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.review {
+  resize:vertical;
+}
+
+/* Button styling */
+.add-movie-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 50%;
+  margin: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-movie-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Movie list container */
+.movie-list {
+  width: 100%;
+  max-width: 450px;
+}
+
+/* Title for the ranked movies */
+.list-title {
+  font-size: 1.75rem;
+  color: #34495e;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Individual movie item */
+.movies-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.movie-item {
+  color: #333;
+  background-color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+/* Movie poster image */
+.movie-poster {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Movie info container */
+.movie-info {
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Movie title */
+.movie-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+/* Movie rating */
+.movie-rating {
+  font-size: 1.1rem;
+  color: #16a085;
+}
+
+/* No movies found text */
+.no-movies {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #7f8c8d;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 15px;
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .form-title {
+    font-size: 1.6rem;
+  }
+
+  .input-title, .input-rating {
+    font-size: 1rem;
+  }
+
+  .add-movie-btn {
+    font-size: 1rem;
+  }
+
+  .list-title {
+    font-size: 1.5rem;
+  }
+
+  .movie-poster {
+    width: 80px;
+    height: 120px;
+  }
+}
