@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ReactNotifications, Store } from 'react-notifications-component'
 import axios from 'axios';
 import './App.css';
 
@@ -18,7 +19,17 @@ const App = () => {
         rating: parseFloat(rating),
         review: review.trim(),
       });
-      alert(response.data.message);
+      Store.addNotification({
+        message: response.data.message,
+        type: "default",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+        }
+      });
       setMovieTitle(''); 
       setImageLink('');
       setRating('');
@@ -26,17 +37,38 @@ const App = () => {
       getMovies();
     } catch (error) {
       console.error('Error adding movie:', error.response || error);
-      alert('Failed to add movie.');
+      Store.addNotification({
+        message: "Failed to add movie.",
+        type: "danger",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+        }
+      });
     }
   };
 
   const getMovies = async () => {
+
     try {
       const response = await axios.get(`/movies`);
       setMovies(response.data);
     } catch (error) {
       console.error('Error fetching movies:', error.response || error);
-      alert('Failed to fetch movies.');
+      Store.addNotification({
+        message: "Failed to fetch movies.",
+        type: "danger",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+        }
+      });
     }
   };
 
@@ -45,7 +77,11 @@ const App = () => {
   }, []);
 
   return (
+
     <div className="app-container">
+      <div className="notifications">
+        <ReactNotifications />
+      </div>
       <h1 className="app-title">MyMovies</h1>
 
       <section className="movie-form">

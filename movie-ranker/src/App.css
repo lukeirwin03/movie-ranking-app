@@ -5,6 +5,12 @@
   box-sizing: border-box;
 }
 
+.notifications {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #777777;
+}
 /* Main app container */
 .app-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
