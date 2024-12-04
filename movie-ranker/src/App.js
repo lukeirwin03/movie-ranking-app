@@ -73,6 +73,17 @@ const App = () => {
     }
   };
 
+  const deleteMovie = async (movieId) => {
+    try {
+      const response = await axios.delete(`/movie/${movieId}`);
+      alert(response.data.message);
+      getMovies(); // Refresh the movie list
+    } catch (error) {
+      console.error('Error deleting movie:', error.response || error);
+      alert('Failed to delete movie.');
+    }
+  };
+
   useEffect(() => {
     getMovies();
   }, []);
@@ -131,6 +142,7 @@ const App = () => {
                   <p className="movie-title">{movie.title || "No Title Provided"}</p>
                   <span className="movie-rating">{movie.rating}/5</span>
                   <p><strong>Review:</strong> {movie.review || "No review added."}</p>
+                  <button onClick={() => deleteMovie(movie.movieId)}>Delete</button> {/* Add this line */}
                 </div>
               </div>
             ))

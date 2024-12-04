@@ -47,6 +47,25 @@ def add_movie(movie: Movie):
     return {"message": "Movie added successfully!"}
 
 
+@app.delete("/movie/{movie_id}")
+def delete_movie(movie_id: str):
+    # Get the movie details to fetch the title
+    movie = movies_table.get_item(Key={"movieId": movie_id}).get('Item')
+    if not movie:
+        raise HTTPException(status_code=404, detail="Movie not found")
+    
+    movie_title = movie['title']  # Get the title of the movie
+    
+    # Proceed with the deletion
+    response = movies_table.delete_item(Key={"movieId": movie_id})
+    
+    if response.get("ResponseMetadata", {}).get("HTTPStatusCode") == 200:
+        return {"message": f"Movie '{movie_title}' deleted successfully!"}
+    else:
+        raise HTTPException(status_code=404, detail="Movie not found")
+
+
+
 @app.get("/movies", response_model=List[Movie])
 async def get_movies():
     try:
