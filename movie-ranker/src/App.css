@@ -155,7 +155,19 @@
 /* Movie rating */
 .movie-rating {
   font-size: 1.1rem;
-  color: #16a085;
+}
+
+/* Rating color classes */
+.red {
+  color: #ff0000;
+}
+
+.yellow {
+  color: #B8860B;
+}
+
+.green {
+  color: #008000;
 }
 
 /* No movies found text */
