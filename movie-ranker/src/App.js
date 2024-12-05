@@ -12,6 +12,22 @@ const App = () => {
   const [movies, setMovies] = useState([]);
 
   const addMovie = async () => {
+    // Validater the rating input
+    if (rating < 1 || rating > 5) {
+      Store.addNotification({
+        message: "Rating must be between 1 and 5.",
+        type: "warning",
+        insert: "top",
+        container: "top-left",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+        }
+      });
+      return; //Exit if rating is invalid
+
+    }
     try {
       const response = await axios.post(`/movie`, {
         movieId: Date.now().toString(),
@@ -127,26 +143,38 @@ const App = () => {
         <button onClick={addMovie}>Add Movie</button>
       </section>
 
-      <section className="movie-list">
-        <h2>Ranked Movies</h2>
-        <div className="movies-container">
-          {movies.length > 0 ? (
-            movies.map((movie) => (
-              <div key={movie.movieId} className="movie-item">
-                <img 
-                  src={movie.imageLink || "https://via.placeholder.com/150x225?text=No+Image"}
-                  alt={`${movie.title} poster`} 
-                  className="movie-poster"
-                />
-                <div className="movie-info">
-                  <p className="movie-title">{movie.title || "No Title Provided"}</p>
-                  <span className="movie-rating">{movie.rating}/5</span>
-                  <p><strong>Review:</strong> {movie.review || "No review added."}</p>
-                  <button onClick={() => deleteMovie(movie.movieId)}>Delete</button> {/* Add this line */}
-                </div>
-              </div>
-            ))
-          ) : (
+   <section className="movie-list">
+    <h2>Ranked Movies</h2>
+    <div className="movies-container">
+        {movies.length > 0 ? (
+            movies.map((movie) => {
+                // Determine the CSS class based on the rating
+                let ratingClass = '';
+                if (movie.rating === 1) {
+                    ratingClass = 'red';
+                } else if (movie.rating === 2 || movie.rating === 3) {
+                    ratingClass = 'yellow';
+                } else if (movie.rating === 4 || movie.rating === 5) {
+                    ratingClass = 'green';
+                }
+
+                return (
+                    <div key={movie.movieId} className="movie-item">
+                        <img 
+                            src={movie.imageLink || "https://via.placeholder.com/150x225?text=No+Image"}
+                            alt={`${movie.title} poster`} 
+                            className="movie-poster"
+                        />
+                        <div className="movie-info">
+                            <p className="movie-title">{movie.title || "No Title Provided"}</p>
+                            <span className={`movie-rating ${ratingClass}`}>{movie.rating}/5</span>
+                            <p><strong>Review:</strong> {movie.review || "No review added."}</p>
+                            <button onClick={() => deleteMovie(movie.movieId)}>Delete</button>
+                        </div>
+                    </div>
+                );
+            })
+        ) : (
             <p>No movies available.</p>
           )}
         </div>
